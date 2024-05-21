@@ -16,7 +16,7 @@ const theme = extendTheme({ colors });
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <GlobalStyle styles={{ body: { userSelect: "none" } }} />
+      <GlobalStyle styles={{ "*": { userSelect: "none" } }} />
       <App />
     </ChakraProvider>
   </React.StrictMode>,
