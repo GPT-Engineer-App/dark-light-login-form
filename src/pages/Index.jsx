@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, VStack, Input, Button, Text, useColorMode, useColorModeValue, IconButton, FormControl, FormLabel, Box } from "@chakra-ui/react";
+import { Container, VStack, Input, Button, Text, useColorMode, useColorModeValue, IconButton, FormControl, FormLabel, Box, useToast } from "@chakra-ui/react";
 import { FaSun, FaMoon } from "react-icons/fa";
 
 const Index = () => {
@@ -11,10 +11,38 @@ const Index = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const toast = useToast();
+
   const handleLogin = () => {
-    // Handle login logic here
+    if (!email) {
+      toast({
+        title: "Email is required.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    if (!password) {
+      toast({
+        title: "Password is required.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+
     console.log("Email:", email);
     console.log("Password:", password);
+
+    toast({
+      title: "Login successful.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
   };
 
   return (
