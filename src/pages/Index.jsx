@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, VStack, Input, Button, Text, useColorMode, useColorModeValue, IconButton, FormControl, FormLabel, Box, useToast } from "@chakra-ui/react";
+import { Container, VStack, Input, Button, Text, useColorMode, useColorModeValue, IconButton, FormControl, FormLabel, Box, InputGroup, InputRightElement, useToast } from "@chakra-ui/react";
 import { FaSun, FaMoon } from "react-icons/fa";
 
 const Index = () => {
@@ -11,7 +11,10 @@ const Index = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false);
   const toast = useToast();
+
+  const handleShowClick = () => setShowPassword(!showPassword);
 
   const handleLogin = () => {
     if (!email) {
@@ -55,11 +58,46 @@ const Index = () => {
           </Text>
           <FormControl id="email">
             <FormLabel>Email address</FormLabel>
-            <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onBlur={() => {
+                if (!email) {
+                  toast({
+                    title: "Email is required.",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                  });
+                }
+              }}
+            />
           </FormControl>
           <FormControl id="password">
             <FormLabel>Password</FormLabel>
-            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <InputGroup>
+              <Input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onBlur={() => {
+                  if (!password) {
+                    toast({
+                      title: "Password is required.",
+                      status: "error",
+                      duration: 5000,
+                      isClosable: true,
+                    });
+                  }
+                }}
+              />
+              <InputRightElement width="4.5rem">
+                <Button h="1.75rem" size="sm" onClick={handleShowClick}>
+                  {showPassword ? "Hide" : "Show"}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
           </FormControl>
           <Button colorScheme="blue" onClick={handleLogin}>
             Log In
