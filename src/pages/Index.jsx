@@ -27,9 +27,29 @@ const Index = () => {
       return;
     }
 
+    if (!email.includes("@") || !email.includes(".")) {
+      toast({
+        title: "Email must contain '@' and '.'",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+
     if (!password) {
       toast({
         title: "Password is required.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    if (password.length < 6) {
+      toast({
+        title: "Password must be at least 6 characters.",
         status: "error",
         duration: 5000,
         isClosable: true,
