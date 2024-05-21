@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Container, VStack, Input, Button, Text, useColorMode, useColorModeValue, IconButton, FormControl, FormLabel, Box, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { Container, VStack, Input, Button, Text, useColorMode, useColorModeValue, IconButton, FormControl, FormLabel, Box, InputGroup, InputRightElement, useToast } from "@chakra-ui/react";
 import { FaSun, FaMoon } from "react-icons/fa";
 
 const Index = () => {
   const { toggleColorMode } = useColorMode();
+  const toast = useToast();
   const colorModeIcon = useColorModeValue(<FaMoon />, <FaSun />);
   const bgColor = useColorModeValue("gray.100", "gray.900");
   const textColor = useColorModeValue("gray.800", "white");
@@ -38,8 +39,13 @@ const Index = () => {
       return;
     }
 
-    console.log("Email:", email);
-    console.log("Password:", password);
+    toast({
+      title: "Login successful.",
+      description: "You have successfully logged in.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
 
     setEmailError("");
     setPasswordError("");
