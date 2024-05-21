@@ -49,7 +49,7 @@ const Index = () => {
   };
 
   return (
-    <Container centerContent maxW="container.sm" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center" bg={bgColor} color={textColor}>
+    <Container centerContent maxW={{ base: "container.sm", md: "container.md", lg: "container.lg" }} height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center" p={4} bg={bgColor} color={textColor}>
       <IconButton aria-label="Toggle color mode" icon={colorModeIcon} onClick={toggleColorMode} alignSelf="flex-end" mb={4} />
       <Box bg={useColorModeValue("white", "gray.700")} p={8} borderRadius="md" boxShadow="md" width="100%">
         <VStack spacing={4} align="stretch">
@@ -103,6 +103,9 @@ const Index = () => {
             Log In
           </Button>
         </VStack>
+      </Box>
+      <Box as="footer" mt={8} textAlign="center" width="100%">
+        <Text fontSize="sm">© 2024 Made by OVFTeam</Text>
       </Box>
     </Container>
   );
